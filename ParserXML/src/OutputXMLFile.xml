@@ -1,0 +1,105 @@
+<library>
+  <book id="1">
+    <title>Pride and Prejudice</title>
+    <author>George Orwell</author>
+    <year>2000</year>
+    <genre>Programming</genre>
+    <price currency="JPY">75.95</price>
+    <reviews>
+      <review>
+        <user>eve</user>
+        <rating>5</rating>
+        <comment>Very informative.</comment>
+      </review>
+      <review>
+        <user>dave</user>
+        <rating>5</rating>
+        <comment>Excellent content.</comment>
+      </review>
+      <review>
+        <user>dave</user>
+        <rating>5</rating>
+        <comment>Could be better.</comment>
+      </review>
+    </reviews>
+    <awards>
+    </awards>
+  </book>
+  <book id="2">
+    <title>Pride and Prejudice</title>
+    <author>George Orwell</author>
+    <year>2021</year>
+    <genre>Fiction</genre>
+    <price currency="RUB">45.46</price>
+    <reviews>
+      <review>
+        <user>bob</user>
+        <rating>5</rating>
+        <comment>Great book!</comment>
+      </review>
+      <review>
+        <user>bob</user>
+        <rating>5</rating>
+        <comment>Could be better.</comment>
+      </review>
+    </reviews>
+    <awards>
+      <award>Book of the Year</award>
+    </awards>
+  </book>
+  <book id="3">
+    <title>Java Programming</title>
+    <author>Joshua Bloch</author>
+    <year>2010</year>
+    <genre>Programming</genre>
+    <price currency="EUR">40.11</price>
+    <reviews>
+      <review>
+        <user>dave</user>
+        <rating>3</rating>
+        <comment>Loved the examples.</comment>
+      </review>
+    </reviews>
+    <awards>
+    </awards>
+  </book>
+  <book id="4">
+    <title>Effective Java</title>
+    <author>Isaac Asimov</author>
+    <year>2001</year>
+    <genre>Fiction</genre>
+    <price currency="GBP">43.46</price>
+    <reviews>
+    </reviews>
+    <publisher>
+      <name>TechBooks Publishing</name>
+      <address>
+        <city>London</city>
+        <country>Russia</country>
+      </address>
+    </publisher>
+    <awards>
+    </awards>
+  </book>
+  <book id="5">
+    <title>1984</title>
+    <author>Isaac Asimov</author>
+    <year>2008</year>
+    <genre>Programming</genre>
+    <price currency="EUR">32.18</price>
+    <reviews>
+    </reviews>
+    <publisher>
+      <name>SciTech Publishers</name>
+      <address>
+        <city>Berlin</city>
+        <country>USA</country>
+      </address>
+    </publisher>
+    <awards>
+      <award>Critics' Choice</award>
+      <award>Best Seller</award>
+      <award>Critics' Choice</award>
+    </awards>
+  </book>
+</library>
