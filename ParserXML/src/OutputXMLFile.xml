@@ -6,6 +6,7 @@
     <genre>Programming</genre>
     <price currency="JPY">75.95</price>
     <reviews>
+    <isbn>null</isbn>
       <review>
         <user>eve</user>
         <rating>5</rating>
@@ -32,6 +33,7 @@
     <genre>Fiction</genre>
     <price currency="RUB">45.46</price>
     <reviews>
+    <isbn>978-3-373294833</isbn>
       <review>
         <user>bob</user>
         <rating>5</rating>
@@ -54,6 +56,7 @@
     <genre>Programming</genre>
     <price currency="EUR">40.11</price>
     <reviews>
+    <isbn>null</isbn>
       <review>
         <user>dave</user>
         <rating>3</rating>
@@ -70,6 +73,7 @@
     <genre>Fiction</genre>
     <price currency="GBP">43.46</price>
     <reviews>
+    <isbn>978-1-245964667</isbn>
     </reviews>
     <publisher>
       <name>TechBooks Publishing</name>
@@ -88,6 +92,7 @@
     <genre>Programming</genre>
     <price currency="EUR">32.18</price>
     <reviews>
+    <isbn>978-3-831814199</isbn>
     </reviews>
     <publisher>
       <name>SciTech Publishers</name>

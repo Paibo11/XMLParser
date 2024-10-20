@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
         String xmlFile = "C:\\Users\\kessk\\OneDrive\\Рабочий стол\\TP\\XMLParser\\ParserXML\\src\\XMLFile.xml";
         List<Book> books = parse(xmlFile);
+
         for (Book book : books) {
             System.out.println(book);
         }
@@ -64,7 +65,7 @@ public class Main {
                 price.setValue(Double.parseDouble(priceValue));
                 price.setCurrency(currency);
                 book.setPrice(price);
-                System.out.println("Parsed price: " + price.getValue() + " " + price.getCurrency());
+                System.out.println("Цены: " + price.getValue() + " " + price.getCurrency());
             } else if (innerLine.startsWith("<publisher>")) {
                 book.setPublisher(parsePublisher(br));
             } else if (innerLine.startsWith("<translator>")) {
@@ -80,8 +81,6 @@ public class Main {
         }
         return book;
     }
-
-
 
     private static Publisher parsePublisher(BufferedReader br) throws IOException {
         String line;
@@ -108,9 +107,7 @@ public class Main {
                 }
             }
         }
-        Publisher publisher = new Publisher(name, city, country);
-        System.out.println("публикации: " + publisher);
-        return publisher;
+        return new Publisher(name, city, country);
     }
 
     private static List<Review> parseReviews(BufferedReader br) throws IOException {
@@ -189,9 +186,12 @@ public class Main {
                 writer.write("    <year>" + book.getYear() + "</year>\n");
                 writer.write("    <genre>" + book.getGenre() + "</genre>\n");
                 if (book.getPrice() != null) {
-                    writer.write("    <price currency=\"" + book.getPrice().getCurrency() + "\">" + book.getPrice().getValue() + "</price>\n");
+                    writer.write("    <price currency=\"" + book.getPrice().getCurrency() + "\">");
+                    writer.write("" + book.getPrice().getValue());
+                    writer.write("</price>\n");
                 }
                 writer.write("    <reviews>\n");
+                writer.write("    <isbn>" + book.getIsbn() + "</isbn>\n");
                 for (Review review : book.getReviews()) {
                     writer.write("      <review>\n");
                     writer.write("        <user>" + review.getUser() + "</user>\n");
