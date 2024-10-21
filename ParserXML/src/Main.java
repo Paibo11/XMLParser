@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.*;
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -190,16 +191,16 @@ public class Main {
                     writer.write("" + book.getPrice().getValue());
                     writer.write("</price>\n");
                 }
-                writer.write("    <reviews>\n");
                 writer.write("    <isbn>" + book.getIsbn() + "</isbn>\n");
-                for (Review review : book.getReviews()) {
-                    writer.write("      <review>\n");
-                    writer.write("        <user>" + review.getUser() + "</user>\n");
-                    writer.write("        <rating>" + review.getRating() + "</rating>\n");
-                    writer.write("        <comment>" + review.getComment() + "</comment>\n");
-                    writer.write("      </review>\n");
+                if (book.getReviews() != null) {
+                    for (Review review : book.getReviews()) {
+                        writer.write("    <review>\n");
+                        writer.write("      <user>" + review.getUser() + "</user>\n");
+                        writer.write("      <rating>" + review.getRating() + "</rating>\n");
+                        writer.write("      <comment>" + review.getComment() + "</comment>\n");
+                        writer.write("     </review>\n");
                 }
-                writer.write("    </reviews>\n");
+                } else writer.write("");
                 if (book.getPublisher() != null) {
                     writer.write("    <publisher>\n");
                     writer.write("      <name>" + book.getPublisher().getName() + "</name>\n");
@@ -209,12 +210,15 @@ public class Main {
                     writer.write("      </address>\n");
                     writer.write("    </publisher>\n");
                 }
-                writer.write("    <awards>\n");
-                for (String award : book.getAwards()) {
-                    writer.write("      <award>" + award + "</award>\n");
-                }
-                writer.write("    </awards>\n");
-                writer.write("  </book>\n");
+                writer.write("    <translator>" + book.getTranslator() + "</translator>\n");
+                if (book.getAwards() != null) {
+                    writer.write("    <awards>\n");
+                    for (String award : book.getAwards()) {
+                        writer.write("      <award>" + award + "</award>\n");
+                    }
+                    writer.write("    </awards>\n");
+                    writer.write("  </book>\n");
+                } else writer.write("");
             }
             writer.write("</library>");
         } catch (IOException e) {
