@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -21,7 +20,7 @@ public class Main {
         validateXML(xmlFile, xsdFile);
 
         String outputXmlFile = "C:\\Users\\kessk\\OneDrive\\Рабочий стол\\TP\\XMLParser\\ParserXML\\src\\OutputXMLFile.xml";
-        serializeBooks(books, outputXmlFile);
+        perBooks(books, outputXmlFile);
     }
 
     public static List<Book> parse(String filename) {
@@ -62,7 +61,7 @@ public class Main {
             } else if (innerLine.startsWith("<price")) {
                 String currency = getAttributeValue(innerLine, "currency");
                 String priceValue = innerLine.substring(innerLine.indexOf(">") + 1, innerLine.indexOf("</price>"));
-                Book.Price price = new Book.Price();
+                Price price = new Price();
                 price.setValue(Double.parseDouble(priceValue));
                 price.setCurrency(currency);
                 book.setPrice(price);
@@ -83,7 +82,7 @@ public class Main {
         return book;
     }
 
-    private static Publisher parsePublisher(BufferedReader br) throws IOException {
+private static Publisher parsePublisher(BufferedReader br) throws IOException {
         String line;
         String name = null, city = null, country = null;
 
@@ -177,7 +176,7 @@ public class Main {
         return line.substring(startIndex, endIndex);
     }
 
-    private static void serializeBooks(List<Book> books, String filename) {
+    private static void perBooks(List<Book> books, String filename) {
         try (FileWriter writer = new FileWriter(filename)) {
             writer.write("<library>\n");
             for (Book book : books) {
@@ -222,7 +221,7 @@ public class Main {
             }
             writer.write("</library>");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка: " + e.getMessage());
         }
     }
 
@@ -251,34 +250,6 @@ class Book {
     private String translator;
     private String isbn;
 
-    public static class Price {
-        private Double value;
-        private String currency;
-
-        public Double getValue() {
-            return value;
-        }
-
-        public void setValue(Double value) {
-            this.value = value;
-        }
-
-        public String getCurrency() {
-            return currency;
-        }
-
-        public void setCurrency(String currency) {
-            this.currency = currency;
-        }
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
 
     public Integer getId() {
         return id;
@@ -302,6 +273,10 @@ class Book {
 
     public Price getPrice() {
         return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
     public Publisher getPublisher() {
@@ -340,10 +315,6 @@ class Book {
         this.genre = genre;
     }
 
-    public void setPrice(Price price) {
-        this.price = price;
-    }
-
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
@@ -358,6 +329,14 @@ class Book {
 
     public void setTranslator(String translator) {
         this.translator = translator;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     @Override
@@ -377,6 +356,33 @@ class Book {
                 '}';
     }
 }
+
+class Price {
+    private Double value;
+    private String currency;
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    @Override
+    public String toString() {
+        return value + " " + currency;
+    }
+}
+
 
 class Publisher {
     private String name;
