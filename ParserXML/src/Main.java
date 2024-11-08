@@ -176,55 +176,6 @@ private static Publisher parsePublisher(BufferedReader br) throws IOException {
         return line.substring(startIndex, endIndex);
     }
 
-    private static void perBooks(List<Book> books, String filename) {
-        try (FileWriter writer = new FileWriter(filename)) {
-            writer.write("<library>\n");
-            for (Book book : books) {
-                writer.write("  <book id=\"" + book.getId() + "\">\n");
-                writer.write("    <title>" + book.getTitle() + "</title>\n");
-                writer.write("    <author>" + book.getAuthor() + "</author>\n");
-                writer.write("    <year>" + book.getYear() + "</year>\n");
-                writer.write("    <genre>" + book.getGenre() + "</genre>\n");
-                if (book.getPrice() != null) {
-                    writer.write("    <price currency=\"" + book.getPrice().getCurrency() + "\">");
-                    writer.write("" + book.getPrice().getValue());
-                    writer.write("</price>\n");
-                }
-                writer.write("    <isbn>" + book.getIsbn() + "</isbn>\n");
-                if (book.getReviews() != null) {
-                    for (Review review : book.getReviews()) {
-                        writer.write("    <review>\n");
-                        writer.write("      <user>" + review.getUser() + "</user>\n");
-                        writer.write("      <rating>" + review.getRating() + "</rating>\n");
-                        writer.write("      <comment>" + review.getComment() + "</comment>\n");
-                        writer.write("     </review>\n");
-                }
-                } else writer.write("");
-                if (book.getPublisher() != null) {
-                    writer.write("    <publisher>\n");
-                    writer.write("      <name>" + book.getPublisher().getName() + "</name>\n");
-                    writer.write("      <address>\n");
-                    writer.write("        <city>" + book.getPublisher().getCity() + "</city>\n");
-                    writer.write("        <country>" + book.getPublisher().getCountry() + "</country>\n");
-                    writer.write("      </address>\n");
-                    writer.write("    </publisher>\n");
-                }
-                writer.write("    <translator>" + book.getTranslator() + "</translator>\n");
-                if (book.getAwards() != null) {
-                    writer.write("    <awards>\n");
-                    for (String award : book.getAwards()) {
-                        writer.write("      <award>" + award + "</award>\n");
-                    }
-                    writer.write("    </awards>\n");
-                    writer.write("  </book>\n");
-                } else writer.write("");
-            }
-            writer.write("</library>");
-        } catch (IOException e) {
-            System.out.println("Ошибка: " + e.getMessage());
-        }
-    }
-
     private static void validateXML(String xmlFile, String xsdFile) {
         try {
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -232,6 +183,55 @@ private static Publisher parsePublisher(BufferedReader br) throws IOException {
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlFile)));
         } catch (Exception e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+    }
+
+    private static void perBooks(List<Book> books, String filename) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write("<library>\n");
+            for (Book book : books) {
+                writer.write("  <book id=\"" + book.getId() + "\">\n");
+                writer.write("      <title>" + book.getTitle() + "</title>\n");
+                writer.write("      <author>" + book.getAuthor() + "</author>\n");
+                writer.write("      <year>" + book.getYear() + "</year>\n");
+                writer.write("      <genre>" + book.getGenre() + "</genre>\n");
+                if (book.getPrice() != null) {
+                    writer.write("      <price currency=\"" + book.getPrice().getCurrency() + "\">");
+                    writer.write("" + book.getPrice().getValue());
+                    writer.write("</price>\n");
+                }
+                writer.write("      <isbn>" + book.getIsbn() + "</isbn>\n");
+                if (book.getReviews() != null) {
+                    for (Review review : book.getReviews()) {
+                        writer.write("      <review>\n");
+                        writer.write("          <user>" + review.getUser() + "</user>\n");
+                        writer.write("          <rating>" + review.getRating() + "</rating>\n");
+                        writer.write("          <comment>" + review.getComment() + "</comment>\n");
+                        writer.write("      </review>\n");
+                }
+                } else writer.write("");
+                if (book.getPublisher() != null) {
+                    writer.write("  <publisher>\n");
+                    writer.write("      <name>" + book.getPublisher().getName() + "</name>\n");
+                    writer.write("      <address>\n");
+                    writer.write("          <city>" + book.getPublisher().getCity() + "</city>\n");
+                    writer.write("          <country>" + book.getPublisher().getCountry() + "</country>\n");
+                    writer.write("      </address>\n");
+                    writer.write("  </publisher>\n");
+                }
+                writer.write("  <translator>" + book.getTranslator() + "</translator>\n");
+                if (book.getAwards() != null) {
+                    writer.write("  <awards>\n");
+                    for (String award : book.getAwards()) {
+                        writer.write("      <award>" + award + "</award>\n");
+                    }
+                    writer.write("  </awards>\n");
+                    writer.write("  </book>\n");
+                } else writer.write("");
+            }
+            writer.write("</library>");
+        } catch (IOException e) {
             System.out.println("Ошибка: " + e.getMessage());
         }
     }
